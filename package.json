@@ -37,6 +37,7 @@
         "eslint-plugin-prettier": "^4.2.1",
         "eslint-plugin-tsdoc": "^0.2.17",
         "eslint-webpack-plugin": "^3.2.0",
+        "file-loader": "^6.2.0",
         "fork-ts-checker-webpack-plugin": "^7.2.13",
         "prettier": "^2.7.1",
         "rimraf": "^3.0.2",
