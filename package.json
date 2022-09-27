@@ -1,0 +1,31 @@
+{
+    "name": "webcraft",
+    "description": "A Minecraft clone that runs in your browser by using WebGL.",
+    "version": "0.0.0",
+    "license": "MIT",
+    "private": true,
+    "author": {
+        "name": "G'lek Tarssza",
+        "email": "glek@glektarssza.com",
+        "url": "https://glektarssza.com"
+    },
+    "keywords": [
+        "minecraft",
+        "clone",
+        "game",
+        "html5",
+        "3d",
+        "webgl"
+    ],
+    "homepage": "https://glektarssza.github.io/webcraft",
+    "bugs": {
+        "url": "https://github.com/glektarssza/webcraft/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/glektarssza/webcraft"
+    },
+    "scripts": {},
+    "dependencies": {},
+    "devDependencies": {}
+}
