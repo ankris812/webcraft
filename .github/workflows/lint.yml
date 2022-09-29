@@ -1,0 +1,38 @@
+name: Lint
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - v*
+    paths:
+      - "**/*.ts"
+      - .github/workflows/lint.yml
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "**/*.ts"
+      - .github/workflows/lint.yml
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - id: checkout
+        name: Checkout
+        uses: actions/checkout@v3
+      - id: install-nodejs
+        name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: yarn
+      - id: install-dependencies
+        name: Install Dependencies
+        run: yarn install --frozen-lockfile
+      - id: lint
+        name: Lint
+        run: yarn lint
