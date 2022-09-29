@@ -113,14 +113,14 @@ async function main(): Promise<void> {
             lastFrameTimestamp = performance.now();
         }
     };
-    const stop = (): void => {
-        running = false;
-        if (lastFrameRequestID !== null) {
-            cancelAnimationFrame(lastFrameRequestID);
-            lastFrameRequestID = null;
-            lastFrameTimestamp = null;
-        }
-    };
+    // const stop = (): void => {
+    //     running = false;
+    //     if (lastFrameRequestID !== null) {
+    //         cancelAnimationFrame(lastFrameRequestID);
+    //         lastFrameRequestID = null;
+    //         lastFrameTimestamp = null;
+    //     }
+    // };
     resetContext();
     start();
 }
