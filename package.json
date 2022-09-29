@@ -27,6 +27,7 @@
     },
     "scripts": {
         "lint": "eslint --ext .ts ./src/ts/",
+        "lint:report": "eslint --output-file eslint_report.json --format json --ext .ts ./src/ts/",
         "dev": "webpack-cli serve --config-name dev",
         "build": "yarn build:prod",
         "build:dev": "webpack-cli build --config-name dev",
