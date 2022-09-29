@@ -33,6 +33,19 @@ jobs:
       - id: install-dependencies
         name: Install Dependencies
         run: yarn install --frozen-lockfile
-      - id: lint
-        name: Lint
-        run: yarn lint
+      - id: generate-eslint-report
+        name: Generate ESLint Report
+        continue-on-error: true
+        run: yarn lint:report
+      - id: annotate-with-eslint
+        name: Annotate with ESLint Report
+        uses: ataylorme/eslint-annotate-action@v2
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          report-json: ${{ github.workspace }}/eslint_report.json
+      - id: upload-report
+        name: Upload ESLint Report
+        uses: actions/upload-artifact@v2
+        with:
+          name: eslint_report.json
+          path: ${{ github.workspace }}/eslint_report.json
