@@ -15,11 +15,34 @@ export class Renderer {
 
     /**
      * Create a new instance.
-     *
-     * @param native - The native WebGL rendering context to use.
      */
-    public constructor(native: WebGLRenderingContext) {
-        this.native = native;
+    public constructor() {
+        let canvas = document.getElementById('gameCanvas');
+        if (!(canvas instanceof HTMLCanvasElement)) {
+            canvas = document.getElementsByTagName('canvas')[0] ?? null;
+        }
+        if (!(canvas instanceof HTMLCanvasElement)) {
+            canvas = document.createElement('canvas');
+            document.body.appendChild(canvas);
+        }
+        if (!(canvas instanceof HTMLCanvasElement)) {
+            throw new Error('Failed to get/create game canvas');
+        }
+        const gl = canvas.getContext('webgl', {
+            alpha: true,
+            antialias: true,
+            depth: true,
+            desynchronized: false,
+            failIfMajorPerformanceCaveat: false,
+            powerPreference: 'default',
+            premultipliedAlpha: true,
+            preserveDrawingBuffer: false,
+            stencil: false
+        });
+        if (gl === null) {
+            throw new Error('Failed to create WebGL rendering context');
+        }
+        this.native = gl;
     }
 
     /**

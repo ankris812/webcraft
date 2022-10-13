@@ -1,3 +1,6 @@
+import {Renderer} from './renderer';
+import {Scene} from './scene';
+
 /**
  * The main game logic/state controller.
  */
@@ -33,6 +36,16 @@ export class Game {
     private _running: boolean;
 
     /**
+     * The game renderer.
+     */
+    public readonly renderer: Renderer;
+
+    /**
+     * The game scene.
+     */
+    public readonly scene: Scene;
+
+    /**
      * Whether the game is running.
      */
     public get isRunning(): boolean {
@@ -47,6 +60,8 @@ export class Game {
         this._lastFrameTimestamp = null;
         this._boundDoFrame = this._doFrame.bind(this, false);
         this._running = false;
+        this.renderer = new Renderer();
+        this.scene = new Scene();
     }
 
     /**
@@ -93,14 +108,15 @@ export class Game {
      * frame.
      */
     private _update(delta: number): void {
-        // TODO: Update game state
+        this.scene.update(delta);
     }
 
     /**
      * Render the game state.
      */
     private _render(): void {
-        // TODO: Render game state
+        this.renderer.reset();
+        this.renderer.render(this.scene);
     }
 
     /**
@@ -117,7 +133,6 @@ export class Game {
                 (this._lastFrameTimestamp ?? performance.now())) /
             1000;
         this._update(delta);
-        // TODO: Reset renderer
         this._render();
         this._lastFrameTimestamp = performance.now();
         if (this.isRunning && !isSingleFrame) {
