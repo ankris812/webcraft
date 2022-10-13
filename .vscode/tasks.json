@@ -2,42 +2,11 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "yarn: install",
-            "detail": "Install dependencies.",
-            "type": "npm",
-            "script": "install",
-            "dependsOn": [],
-            "dependsOrder": "sequence",
-            "group": "none",
-            "isBackground": false,
-            "icon": {
-                "id": "cloud-download",
-                "color": "terminal.ansiWhite"
-            },
-            "promptOnClose": false,
-            "runOptions": {
-                "instanceLimit": 1,
-                "reevaluateOnRerun": true,
-                "runOn": "default"
-            },
-            "presentation": {
-                "echo": false,
-                "reveal": "silent",
-                "focus": false,
-                "panel": "shared",
-                "showReuseMessage": false,
-                "clear": false
-            },
-            "problemMatcher": []
-        },
-        {
             "label": "yarn: dev",
             "detail": "Launch the development server.",
             "type": "npm",
             "script": "dev",
-            "dependsOn": [
-                "npm: install"
-            ],
+            "dependsOn": [],
             "dependsOrder": "sequence",
             "group": "none",
             "isBackground": true,
