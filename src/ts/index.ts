@@ -1,49 +1,24 @@
-import {Game} from './game';
+import debug from 'debug';
+import {utils} from './lib';
 
-async function domReady(timeout = Infinity): Promise<void> {
-    if (document.readyState === 'complete') {
-        return;
-    }
-    await new Promise<void>((resolve, reject) => {
-        if (document.readyState === 'complete') {
-            resolve();
-            return;
-        }
-        let timer: number | null = null;
-        const listener = (): void => {
-            if (document.readyState === 'complete') {
-                document.removeEventListener('readystatechange', listener);
-                if (timer !== null) {
-                    clearTimeout(timer);
-                    timer = null;
-                }
-                resolve();
-            }
-        };
-        if (isFinite(timeout) && timeout >= 0) {
-            timer = setTimeout(() => {
-                document.removeEventListener('readystatechange', listener);
-                timer = null;
-                reject(
-                    new Error(`DOM did not become ready within ${timeout} ms`)
-                );
-            }, timeout);
-        }
-        document.addEventListener('readystatechange', listener);
-    });
-}
+const params = new URLSearchParams(location.search);
+const debugNamespaces =
+    params.get('debug') ?? localStorage.getItem('debug') ?? '';
+debug.enable(debugNamespaces);
+localStorage.setItem('debug', debugNamespaces);
+
+const log = debug('main:log');
+const error = debug('main:error');
 
 async function main(): Promise<void> {
-    await domReady();
-    const game = new Game();
-    game.start();
+    await utils.domReady();
 }
 
 main()
-    .then(() => console.log('Game started normally'))
-    .catch((err: Error) => {
-        console.error('Fatal error during startup');
-        console.error(err);
+    .then((): void => {
+        log('Started normally');
+    })
+    .catch((err: Error): void => {
+        error('Fatal error during startup');
+        error(err);
     });
-
-export {};
