@@ -7,7 +7,7 @@
  * @returns A promise that resolves when the DOM has become ready or rejects if
  * a timeout is provided and reached.
  */
-export async function domReady(timeout = Infinity): Promise<void> {
+export async function ready(timeout = Infinity): Promise<void> {
     if (document.readyState === 'complete') {
         return;
     }

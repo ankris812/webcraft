@@ -11,7 +11,7 @@ const log = debug('main:log');
 const error = debug('main:error');
 
 async function main(): Promise<void> {
-    await utils.domReady();
+    await utils.dom.ready();
 }
 
 main()
