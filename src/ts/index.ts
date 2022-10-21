@@ -1,14 +1,3 @@
-import debug from 'debug';
-
-const params = new URLSearchParams(location.search);
-const debugNamespaces =
-    params.get('debug') ?? localStorage.getItem('debug') ?? '';
-debug.enable(debugNamespaces);
-localStorage.setItem('debug', debugNamespaces);
-
-const log = debug('main:log');
-const error = debug('main:error');
-
 /**
  * Wait for the DOM to become ready to manipulate.
  *
@@ -58,9 +47,9 @@ async function main(): Promise<void> {
 
 main()
     .then((): void => {
-        log('Started normally');
+        console.log('Game started normally');
     })
     .catch((err: Error): void => {
-        error('Fatal error during startup');
-        error(err);
+        console.error('Fatal error while starting game');
+        console.error(err);
     });

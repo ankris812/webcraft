@@ -38,7 +38,6 @@
         "rebuild:prod": "yarn clean && yarn build:prod"
     },
     "dependencies": {
-        "debug": "^4.3.4",
         "gl-matrix": "^3.4.3"
     },
     "devDependencies": {
