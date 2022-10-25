@@ -3,17 +3,9 @@ on:
   push:
     branches:
       - main
-    tags:
-      - v*
-    paths:
-      - "**/*.ts"
-      - .github/workflows/codeql.yml
   pull_request:
     branches:
       - main
-    paths:
-      - "**/*.ts"
-      - .github/workflows/codeql.yml
   schedule:
     - cron: "40 23 * * 6"
 jobs:
