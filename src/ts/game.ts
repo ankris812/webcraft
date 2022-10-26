@@ -80,8 +80,9 @@ export class Game {
                 (this._lastFrameTimestamp ?? performance.now())) /
             1000;
         this.scene.update(delta);
-        // TODO: Reset renderer
-        // TODO: Render frame
+        this.renderer.resetContext();
+        this.renderer.clearContext();
+        this.renderer.render(this.scene);
         this._lastFrameTimestamp = performance.now();
     }
 
