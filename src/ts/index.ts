@@ -1,3 +1,5 @@
+import {Game} from './game';
+
 /**
  * Wait for the DOM to become ready to manipulate.
  *
@@ -43,6 +45,8 @@ export async function domReady(timeout = Infinity): Promise<void> {
 
 async function main(): Promise<void> {
     await domReady();
+    const game = new Game();
+    game.start();
 }
 
 main()
