@@ -1,4 +1,5 @@
 import {Renderer} from './renderer';
+import {Scene} from './scene';
 
 /**
  * The main game logic and state controller.
@@ -25,6 +26,11 @@ export class Game {
     public readonly renderer: Renderer;
 
     /**
+     * The main game scene.
+     */
+    public readonly scene: Scene;
+
+    /**
      * Whether the game is running.
      */
     public get isRunning(): boolean {
@@ -36,6 +42,7 @@ export class Game {
      */
     public constructor() {
         this.renderer = new Renderer();
+        this.scene = new Scene();
         this._running = false;
         this._frameRequestID = null;
         this._lastFrameTimestamp = null;
@@ -68,11 +75,11 @@ export class Game {
      * Update the game state and render the frame.
      */
     public nextFrame(): void {
-        // const deltaMS =
-        //     (performance.now() -
-        //         (this._lastFrameTimestamp ?? performance.now())) /
-        //     1000;
-        // TODO: Update
+        const delta =
+            (performance.now() -
+                (this._lastFrameTimestamp ?? performance.now())) /
+            1000;
+        this.scene.update(delta);
         // TODO: Reset renderer
         // TODO: Render frame
         this._lastFrameTimestamp = performance.now();
