@@ -145,4 +145,30 @@ export class Context {
         }
         return this;
     }
+
+    /**
+     * Set the viewport of the instance.
+     *
+     * @param x - The X coordinate of the lower left corner of the viewport.
+     * @param y - The Y coordinate of the lower left corner of the viewport.
+     * @param width - The width of the viewport, in pixels.
+     * @param height - The height of the viewport, in pixels.
+     *
+     * @returns This instance for chaining.
+     *
+     * @throws if the instance is lost.
+     * @throws if a WebGL error occurs during the
+     * operation.
+     */
+    public viewport(x: number, y: number, width: number, height: number): this {
+        if (this.isLost) {
+            throw new Error('Context lost');
+        }
+        this.nativeContext.viewport(x, y, width, height);
+        const err = this.nativeContext.getError();
+        if (err !== WebGLRenderingContext.NO_ERROR) {
+            throw new Error('WebGL error during operation');
+        }
+        return this;
+    }
 }
