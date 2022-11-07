@@ -43,6 +43,9 @@ export abstract class Resource<
     protected constructor(context: Context, ...params: TParams) {
         this.context = context;
         this._native = this._createNativeResource(...params);
+        if (this._native === null) {
+            throw new Error('Failed to create native WebGL resource');
+        }
     }
 
     /**
