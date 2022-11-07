@@ -1,3 +1,5 @@
+import * as webgl from './webgl';
+
 /**
  * Wait for the DOM to become ready to manipulate.
  *
@@ -49,6 +51,47 @@ export async function domReady(timeout = Infinity): Promise<void> {
  */
 async function main(): Promise<void> {
     await domReady();
+    const canvas =
+        document.getElementById('gameCanvas') ??
+        document.getElementsByTagName('canvas')[0] ??
+        document.createElement('canvas');
+    if (!(canvas instanceof HTMLCanvasElement)) {
+        throw new Error('Failed to get canvas element');
+    }
+    if (canvas.parentElement === null) {
+        document.body.appendChild(canvas);
+    }
+    const gl = canvas.getContext('webgl', {
+        alpha: true,
+        antialias: true,
+        depth: true,
+        desynchronized: false,
+        failIfMajorPerformanceCaveat: false,
+        powerPreference: 'default',
+        premultipliedAlpha: true,
+        preserveDrawingBuffer: false,
+        stencil: false
+    });
+    if (gl === null) {
+        throw new Error('Failed to get WebGL context');
+    }
+    const context = new webgl.Context(gl);
+    if (
+        context.drawingBufferWidth !== context.canvas.clientWidth ||
+        context.drawingBufferHeight !== context.canvas.clientHeight
+    ) {
+        context.canvas.width = context.canvas.clientWidth;
+        context.canvas.height = context.canvas.clientHeight;
+        context.viewport(
+            0,
+            0,
+            context.drawingBufferWidth,
+            context.drawingBufferHeight
+        );
+    }
+    context.colorBufferClearValue = [0, 0, 0, 1];
+    context.depthBufferClearValue = 1;
+    context.clear();
 }
 
 main()
