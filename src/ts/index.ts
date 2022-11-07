@@ -1,4 +1,4 @@
-import * as webgl from './webgl';
+import {webgl} from './lib';
 
 /**
  * Wait for the DOM to become ready to manipulate.
