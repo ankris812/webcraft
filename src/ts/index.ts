@@ -41,6 +41,12 @@ export async function domReady(timeout = Infinity): Promise<void> {
     });
 }
 
+/**
+ * The program entry point.
+ *
+ * @returns A promise that resolves once the game has started or rejects if a
+ * fatal error occurs while the game is starting.
+ */
 async function main(): Promise<void> {
     await domReady();
 }
