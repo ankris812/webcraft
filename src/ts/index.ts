@@ -1,5 +1,3 @@
-import {webgl} from './lib';
-
 /**
  * Wait for the DOM to become ready to manipulate.
  *
@@ -75,23 +73,6 @@ async function main(): Promise<void> {
     if (gl === null) {
         throw new Error('Failed to get WebGL context');
     }
-    const context = new webgl.Context(gl);
-    if (
-        context.drawingBufferWidth !== context.canvas.clientWidth ||
-        context.drawingBufferHeight !== context.canvas.clientHeight
-    ) {
-        context.canvas.width = context.canvas.clientWidth;
-        context.canvas.height = context.canvas.clientHeight;
-        context.viewport(
-            0,
-            0,
-            context.drawingBufferWidth,
-            context.drawingBufferHeight
-        );
-    }
-    context.colorBufferClearValue = [0, 0, 0, 1];
-    context.depthBufferClearValue = 1;
-    context.clear();
 }
 
 main()
